@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import { Typography, Divider } from 'antd';
 import './App.css';
+import TodoList from './components/TodoList';
+import Filters from './components/Filters';
+import Login from './components/Login';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import AuthProvider from './context/AuthProvider';
+import AppTodo from './components/AppTodo';
+import AppProvider from './context/AppProvider';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <AppProvider>
+                    <Routes>
+                        <Route element={<Login />} path={'/login'}></Route>
+                        <Route element={<AppTodo />} path={'/'}></Route>
+                    </Routes>
+                </AppProvider>
+            </AuthProvider>
+            ;
+        </BrowserRouter>
+    );
 }
 
 export default App;
